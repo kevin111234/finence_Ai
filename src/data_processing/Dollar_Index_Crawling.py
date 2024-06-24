@@ -5,11 +5,15 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 # 환율 정보 크롤링
+# 날짜 설정
+today_date = datetime.now()
 
-# 크롤링 기간 설정 (최근 1년)
-start_date = datetime.now() - timedelta(days=365)
-end_date = datetime.now()
+# 크롤링할 주소 설정
+base_url = 'https://finance.naver.com/marketindex/exchangeDailyQuote.naver?marketindexCd=FX_USDKRW'
 
+# 크롤링 수행
+for page in range(37):
+    url = f'{base_url}&page={page}'
 
 # 달러 인덱스 크롤링
 
