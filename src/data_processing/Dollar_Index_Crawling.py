@@ -3,6 +3,26 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from datetime import datetime, timedelta
+import sqlalchemy
+import pymysql
+import os
+from dotenv import load_dotenv
+
+# 프로젝트 루트 디렉토리 경로 가져오기
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+# .env 파일 경로 지정
+env_path = os.path.join(project_root, 'FINENCE_AI', '.env')
+
+# .env 파일 로드
+load_dotenv(dotenv_path=env_path)
+
+# 데이터베이스 연결 정보 가져오기
+db_host = os.getenv('DB_HOST')
+db_user = os.getenv('DB_USER')
+db_password = os.getenv('DB_PASSWORD')
+db_name = os.getenv('DB_NAME')
+db_port = int(os.getenv('DB_PORT'))
 
 # 환율 정보 크롤링
 # 날짜 설정
