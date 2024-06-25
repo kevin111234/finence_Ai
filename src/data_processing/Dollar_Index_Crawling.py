@@ -53,6 +53,4 @@ if dollar_index_value:
 else:
     print("달러 인덱스 값을 찾을 수 없습니다.")
 
-# 데이터 가공
-
 # 데이터베이스에 저장
