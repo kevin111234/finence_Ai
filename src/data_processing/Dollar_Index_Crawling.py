@@ -11,11 +11,12 @@ today_date = datetime.now()
 # 크롤링할 주소 설정
 base_url = 'https://finance.naver.com/marketindex/exchangeDailyQuote.naver?marketindexCd=FX_USDKRW&page='
 urls = []
-for i in range(1): # 나중에 37로 수정하기
+for i in range(37):
     page_url = f'{base_url}{i+1}'
     urls.append(page_url)
-print(urls)
 
+date_list = []
+rate_list = []
 # 크롤링 수행
 for url in urls:
     # 요청 보내기
@@ -23,8 +24,22 @@ for url in urls:
     # HTML 파싱
     soup = BeautifulSoup(response.content, "html.parser")
     # 파싱한 soup 변수에서 div > table > tbody > <tr class="up">, <tr class="down"> 모두 정리하기
-    print(soup)
+    # print(soup)
+    for row in soup.find_all("tr"):
+        cells_date = row.find_all("td", class_="date")
+        cells_num = row.find_all("td", class_="num")
+        if cells_date and cells_num:
+            date_text = cells_date[0].text.strip()
+            rate_text = cells_num[0].text.strip().replace(",", "")
+            date_list.append(date_text)
+            rate_list.append(float(rate_text))
 
+# 데이터프레임 생성
+exchange_rate_df = pd.DataFrame({
+    "날짜": date_list,
+    "환율": rate_list
+})
+# print(exchange_rate_df)
 
 # 달러 인덱스 크롤링
 
