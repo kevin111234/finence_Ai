@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine
-import pymysql
 import os
 from dotenv import load_dotenv
 
@@ -54,6 +53,6 @@ exchange_rate_df = pd.DataFrame({
 # print(exchange_rate_df)
 
 # 데이터베이스에 저장
-db_url = f'mysql+pymysql://{DB_User}{DB_Password}@{DB_Host}:{DB_Port}/{DB_Name}'
+db_url = f'mysql+pymysql://{DB_User}:{DB_Password}@{DB_Host}:{DB_Port}/{DB_Name}'
 engine = create_engine(db_url)
 exchange_rate_df.to_sql('exchange_rate', con=engine, if_exists='replace', index=False)
