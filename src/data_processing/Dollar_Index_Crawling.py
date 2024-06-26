@@ -51,7 +51,7 @@ exchange_rate_df = pd.DataFrame({
     "날짜": date_list,
     "환율": rate_list
 })
-print(exchange_rate_df)
+# print(exchange_rate_df)
 
 # 달러 인덱스 크롤링
 dollar_index_url = 'https://kr.investing.com/currencies/us-dollar-index'
@@ -66,3 +66,6 @@ else:
     print("달러 인덱스 값을 찾을 수 없습니다.")
 
 # 데이터베이스에 저장
+db_url = f'mysql+pymysql://{DB_User}{DB_Password}@{DB_Host}:{DB_Port}/{DB_Name}'
+engine = create_engine(db_url)
+exchange_rate_df.to_sql('exchange_rate', con=engine, if_exists='replace', index=False)
