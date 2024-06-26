@@ -2,7 +2,8 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime
+from tqdm import tqdm
 from sqlalchemy import create_engine
 import os
 from dotenv import load_dotenv
@@ -29,7 +30,7 @@ for i in range(37):
 date_list = []
 rate_list = []
 # 크롤링 수행
-for url in urls:
+for url in tqdm(urls, desc="크롤링 진행도", unit="page"):
     # 요청 보내기
     response = requests.get(url)
     # HTML 파싱
@@ -50,9 +51,11 @@ exchange_rate_df = pd.DataFrame({
     "날짜": date_list,
     "환율": rate_list
 })
-# print(exchange_rate_df)
+print(exchange_rate_df, "다음 내용을 데이터베이스에 저장합니다...")
 
 # 데이터베이스에 저장
 db_url = f'mysql+pymysql://{DB_User}:{DB_Password}@{DB_Host}:{DB_Port}/{DB_Name}'
 engine = create_engine(db_url)
 exchange_rate_df.to_sql('exchange_rate', con=engine, if_exists='replace', index=False)
+
+print("데이터베이스에 저장 완료!")
