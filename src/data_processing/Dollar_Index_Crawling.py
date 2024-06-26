@@ -8,6 +8,14 @@ import pymysql
 import os
 from dotenv import load_dotenv
 
+# 환경변수 불러오기
+load_dotenv()
+DB_Host = os.getenv('DB_HOST')
+DB_User = os.getenv('DB_USER')
+DB_Password = os.getenv('DB_PASSWORD')
+DB_Name = os.getenv('DB_NAME')
+DB_Port = os.getenv('DB_PORT')
+
 # 환율 정보 크롤링
 # 날짜 설정
 today_date = datetime.now()
