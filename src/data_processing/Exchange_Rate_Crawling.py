@@ -58,14 +58,10 @@ class ExchangeRateCrawler: # 데이터 구성용 class
         self.save_to_database(df)
         print("데이터베이스에 저장 완료!")
 
-if __name__ == "__main__":
-    crawler = ExchangeRateCrawler()
-    crawler.run()
-
 class ExchangeRateData: # 환율 관련 추가 데이터 크롤링 class
     def __init__(self):
         print()
-        
+
 # 필요한 데이터
 """
 경제 성장률: 한국의 경제 성장률이 미국보다 높으면 원화가 강세를 보이고, 반대의 경우 달러화가 강세를 보입니다.
