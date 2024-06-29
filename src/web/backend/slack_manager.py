@@ -1,8 +1,7 @@
 import slack_sdk
 import os, sys
 from dotenv import load_dotenv
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))))
-from data_processing import Dollar_Index
+import Dollar_Index
 import json
 import requests
 
