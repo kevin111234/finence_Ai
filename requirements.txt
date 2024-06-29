@@ -1,0 +1,8 @@
+# dollar_index_crawling.py
+pandas
+requests
+bs4
+datetime
+sqlalchemy
+os
+dotenv
