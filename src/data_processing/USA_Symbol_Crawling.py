@@ -9,3 +9,6 @@ from sqlalchemy import create_engine, Column, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import time
+from tqdm import tqdm
+from dotenv import load_dotenv
+import os
